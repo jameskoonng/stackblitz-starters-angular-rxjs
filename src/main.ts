@@ -44,9 +44,19 @@ export class App implements OnInit, AfterViewInit {
       subscription.complete();
     });
 
-    observables$.subscribe((x) => console.log(x));
+    observables$.subscribe({
+      next: (item) => console.log(item),
+      error: (err) => console.error(err),
+      complete: () => console.log('complete'),
+    });
 
     //interval(1000).subscribe(console.log);
+
+    from(spiceGirls).subscribe({
+      next: (item) => console.log(`spice girls - ${item}`),
+      error: (err) => console.error(`error occurred ${err}`),
+      complete: () => console.log(`complete`),
+    });
   }
 
   ngAfterViewInit() {
